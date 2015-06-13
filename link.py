@@ -6,32 +6,50 @@
 #     def __init__(self):
 #         pass
 
-class SingletonDecorator:
-    def __init__(self, klass):
-        self.klass = klass
-        self.instance = None
+import pygame
 
-    def __call__(self, *args, **kwds):
-        if self.instance == None:
-            self.instance = self.klass(*args, **kwds)
-        return self.instance
+# Define some colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
+pygame.init()
 
-class foo:
-    def __init__(self, a):
-        self.a = a
+# Set the width and height of the screen [width, height]
+size = (700, 500)
+screen = pygame.display.set_mode(size)
 
+pygame.display.set_caption("ATN моделирование")
 
-a = SingletonDecorator(foo)
+# Loop until the user clicks the close button.
+done = False
 
-x = a('r')
-y = a('f')
-y.a = 'q'
-z = a('e')
-# x.val = 'sausage'
-# y.val = 'eggs'
-# z.val = 'spam'
-print(x.a)
-print(y.a)
-print(z.a)
-print(x is y is z)
+# Used to manage how fast the screen updates
+clock = pygame.time.Clock()
+
+# -------- Main Program Loop -----------
+while not done:
+    # --- Main event loop
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+
+    # --- Game logic should go here
+
+    # --- Drawing code should go here
+
+    # First, clear the screen to white. Don't put other drawing commands
+    # above this, or they will be erased with this command.
+    screen.fill(WHITE)
+
+    # --- Go ahead and update the screen with what we've drawn.
+    pygame.display.flip()
+
+    # --- Limit to 60 frames per second
+    clock.tick(60)
+
+# Close the window and quit.
+# If you forget this line, the program will 'hang'
+# on exit if running from IDLE.
+pygame.quit()
