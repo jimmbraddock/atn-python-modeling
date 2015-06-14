@@ -5,4 +5,5 @@ class GeneratorId:
 
     @staticmethod
     def get_id():
-        return GeneratorId.current_id + 1
+        GeneratorId.current_id += 1
+        return GeneratorId.current_id

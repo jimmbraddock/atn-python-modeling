@@ -1,12 +1,12 @@
 # -*- coding:koi8-r -*-
-import scheduler
 import pygame
+
+import scheduler
 import node
-import vector
-import mobility
+import point
 
 BACKGROUND = (235, 235, 235)
-WINDOW_RECT = (800, 600)
+WINDOW_RECT = [800, 600]
 
 params = {}
 
@@ -36,7 +36,7 @@ class Modeling:
         self.screen = self.setup_pygame()
         self.scene = self.setup_scene()
         self.clock = pygame.time.Clock()
-        self.fps = 100
+        self.fps = 60
         self.done = False
         self.timer = scheduler.timerSingleton()
 
@@ -48,8 +48,8 @@ class Modeling:
         return screen
 
     def setup_scene(self):
-        n = node.Node(450, 50)
-        n2 = node.Node(550, 100)
+        n = node.Node(450, 250, point.Point(100, 100), bound=[800, 600])
+        n2 = node.Node(550, 200, point.Point(80, 80), bound=[800, 600])
         nodes = [n, n2]
         return Scene(nodes)
 
@@ -62,7 +62,6 @@ class Modeling:
             self.scene.update()
             # отрисовка нодов
             self.scene.draw(self.screen)
-            print(self.timer.get_time_modeling())
             pygame.display.flip()
             self.clock.tick(self.fps)
 

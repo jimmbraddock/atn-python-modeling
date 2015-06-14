@@ -6,50 +6,27 @@
 #     def __init__(self):
 #         pass
 
-import pygame
+import numpy
+import matplotlib.pyplot as plt
 
-# Define some colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
 
-pygame.init()
+def bezie(points, delta):
+    x = []
+    y = []
+    d = numpy.linspace(0, 1, delta)
+    for i in d:
+        x.append(
+            points[0][0] * i ** 2 + points[1][0] * 2 * i * (1 - i) + points[2][
+                0] * (1 - i) ** 2)
+        y.append(
+            points[0][1] * i ** 2 + points[1][1] * 2 * i * (1 - i) + points[2][
+                1] * (1 - i) ** 2)
+    return x, y
 
-# Set the width and height of the screen [width, height]
-size = (700, 500)
-screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("ATN моделирование")
+xr, yr = bezie([[3, 3], [8, 3], [5, 4]], 20)
+print(xr)
+print(yr)
 
-# Loop until the user clicks the close button.
-done = False
-
-# Used to manage how fast the screen updates
-clock = pygame.time.Clock()
-
-# -------- Main Program Loop -----------
-while not done:
-    # --- Main event loop
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-
-    # --- Game logic should go here
-
-    # --- Drawing code should go here
-
-    # First, clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
-    screen.fill(WHITE)
-
-    # --- Go ahead and update the screen with what we've drawn.
-    pygame.display.flip()
-
-    # --- Limit to 60 frames per second
-    clock.tick(60)
-
-# Close the window and quit.
-# If you forget this line, the program will 'hang'
-# on exit if running from IDLE.
-pygame.quit()
+plt.plot(xr, yr)
+plt.show()

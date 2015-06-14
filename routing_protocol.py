@@ -14,7 +14,11 @@ class RoutingProtocol:
     def __init__(self):
         self.routing_table = RoutingTable()
 
+
     def send(self, receiver):
+        pass
+
+    def send_hello(self):
         pass
 
     def recv(self, sender):
