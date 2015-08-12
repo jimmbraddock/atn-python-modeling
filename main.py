@@ -4,6 +4,7 @@ import pygame
 import scheduler
 import node
 import point
+import routing_protocol
 
 BACKGROUND = (235, 235, 235)
 WINDOW_RECT = [800, 600]
@@ -15,10 +16,9 @@ params = {}
 
 class Scene:
     def __init__(self, nodes):
-        self.mobility  = []
+        self.mobility = []
         if isinstance(nodes, list):
             self.nodes = nodes
-
         else:
             self.nodes = []
 
@@ -38,6 +38,7 @@ class Modeling:
         self.clock = pygame.time.Clock()
         self.fps = 60
         self.done = False
+        self.router = routing_protocol.GlobalRouter(self.scene.nodes)
         self.timer = scheduler.timerSingleton()
 
     def setup_pygame(self):
@@ -60,6 +61,7 @@ class Modeling:
 
             # работа протокола
             self.scene.update()
+            self.router.nodes = self.scene.nodes
             # отрисовка нодов
             self.scene.draw(self.screen)
             pygame.display.flip()

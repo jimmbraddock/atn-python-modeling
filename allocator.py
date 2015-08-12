@@ -1,5 +1,5 @@
 # -*- coding:koi8-r -*-
 
-class Alocator:
+class Allocator:
     def __init__(self):
         pass
